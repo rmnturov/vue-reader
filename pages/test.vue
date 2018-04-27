@@ -1,19 +1,19 @@
 <template lang="pug">
-  //- div
-  //- h1(title="GHbdtn") Заголовок 1
-  //-   ul.feed(v-if="true")
-  //-     li.feed__list-item(v-for="post in posts")
-  //-       a.feeditem__link(:href="post.link")
-  //-         figure.feeditem__img-wrapper
-  //-           img.feeditem__img(v-if="post.enclosure" :src="post.enclosure.url" :alt="post.title")
-  //-         h2.feeditem__header {{post.title}}
-  //-         p.feeditem__description {{post.content}}
-  //-         time.feeditem__date() {{ post.isoDate | humanDate }}
+  div
+    h1(title="GHbdtn") Заголовок 1
+      ul.feed(v-if="true")
+        li.feed__list-item(v-for="post in posts")
+          a.feeditem__link(:href="post.link")
+            figure.feeditem__img-wrapper
+              img.feeditem__img(v-if="post.enclosure" :src="post.enclosure.url" :alt="post.title")
+            h2.feeditem__header {{post.title}}
+            p.feeditem__description {{post.content}}
+            time.feeditem__date() {{ post.isoDate | humanDate }}
 </template>
 
 <script>
 import axios from "axios";
-// var parser = require("rss-parser-browser");
+var parser = require("rss-parser-browser");
 let feedUrl = "http://news.ngs.ru/rss/articles/";
 let corsNowUrl = "https://cors.now.sh/" + feedUrl;
 
