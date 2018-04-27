@@ -30,6 +30,7 @@ export default {
         });
         return { posts: entries };
       })
+      
       .catch(e => {
         error({ statusCode: 404, message: "Post not found" });
       });
