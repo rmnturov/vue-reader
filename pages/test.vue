@@ -1,11 +1,14 @@
 <template lang="pug">
-  div
-      li(v-for="post in posts")
-        //- img(:src="post.enclosure.url" :alt="post.title")
-        //- img(v-attr="src: post.enclosure.url")
-        p {{post.content}}
-        div {{ post.isoDate | humanDate }}   
+  //- div
+  //- h1(title="GHbdtn") Заголовок 1
+  //-   ul.feed(v-if="true")
+  //-     li.feed__list-item(v-for="post in posts")
+  //-       a.feeditem__link(:href="post.link")
+  //-         figure.feeditem__img-wrapper
   //-           img.feeditem__img(v-if="post.enclosure" :src="post.enclosure.url" :alt="post.title")
+  //-         h2.feeditem__header {{post.title}}
+  //-         p.feeditem__description {{post.content}}
+  //-         time.feeditem__date() {{ post.isoDate | humanDate }}
 </template>
 
 <script>
