@@ -3,7 +3,7 @@ module.exports = {
   ** Headers of the page
   */
   head: {
-    title: 'vue-reader',
+    title: 'Vue Reader',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -20,25 +20,25 @@ module.exports = {
   /*
   ** Build configuration
   */
- css: [
-  // 'element-ui/lib/.css/theme-chalresetk',
-  'element-ui/lib/theme-chalk/index.css',
-  // Load a Node.js module directly (here it's a Sass file)
-  // 'bulma',
-  // CSS file in the project
-  //'@/assets/css/main.css',
-  // SCSS file in the project
-  '@/assets/css/main.scss'
+  css: [
+    // 'element-ui/lib/.css/theme-chalresetk',
+    'element-ui/lib/theme-chalk/index.css',
+    // Load a Node.js module directly (here it's a Sass file)
+    // 'bulma',
+    // CSS file in the project
+    //'@/assets/css/main.css',
+    // SCSS file in the project
+    '@/assets/css/main.scss'
 
-],
+  ],
 
-/*
-** Add element-ui in our app, see plugins/element-ui.js file
-*/
-plugins: [
-  '@/plugins/element-ui',
-  '@/plugins/filters'
-],
+  /*
+  ** Add element-ui in our app, see plugins/element-ui.js file
+  */
+  plugins: [
+    '@/plugins/element-ui',
+    '@/plugins/filters'
+  ],
   build: {
     vendor: [
       'axios'
@@ -46,7 +46,7 @@ plugins: [
     /*
     ** Run ESLint on save
     */
-    extend (config, { isDev, isClient }) {
+    extend(config, { isDev, isClient }) {
       if (isDev && isClient) {
         config.module.rules.push({
           enforce: 'pre',

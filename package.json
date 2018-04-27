@@ -21,11 +21,8 @@
     "net": "^1.0.2",
     "nuxt": "^1.0.0",
     "rss-parser-browser": "^2.2.2",
-    "rss-to-json": "^1.0.4",
     "tls": "0.0.1",
-    "vue-style-loader": "^4.1.0",
-    "whatwg-fetch": "^2.0.4",
-    "xml2js": "^0.4.19"
+    "vue-style-loader": "^4.1.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.2.1",
