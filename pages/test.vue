@@ -1,14 +1,15 @@
 <template lang="pug">
   div
-    h1(title="GHbdtn") Заголовок 1
-      ul.feed(v-if="true")
-        li.feed__list-item(v-for="post in posts")
-          a.feeditem__link(:href="post.link")
-            figure.feeditem__img-wrapper
-              img.feeditem__img(v-if="post.enclosure" :src="post.enclosure.url" :alt="post.title")
-            h2.feeditem__header {{post.title}}
-            p.feeditem__description {{post.content}}
-            time.feeditem__date() {{ post.isoDate | humanDate }}
+    h1 
+      a(:href="feed.link") {{feed.title}}
+    ul.feed(v-if="true")
+      li.feed__list-item(v-for="post in feed.entries")
+        a.feeditem__link(:href="post.link")
+          figure.feeditem__img-wrapper
+            img.feeditem__img(v-if="post.enclosure" :src="post.enclosure.url" :alt="post.title")
+          h2.feeditem__header {{post.title}}
+          p.feeditem__description {{post.content}}
+          time.feeditem__date() {{ post.isoDate | humanDate }}
 </template>
 
 <script>
@@ -23,11 +24,18 @@ export default {
       .get(corsNowUrl)
       .then(res => {
         var entries;
+        var tempTitle;
+        var tempLink;
+        var tempParsed;
         var doc = parser.parseString(res.data, function(err, parsed) {
           entries = parsed.feed.entries;
-          console.log(entries);
+          tempTitle = tempTitle;
+          tempLink = tempLink;
+          // console.log(parsed);
+          tempParsed = parsed.feed;
+          // console.log(tempParsed);
         });
-        return { posts: entries };
+        return { feed: tempParsed };
       })
       
       .catch(e => {
@@ -138,7 +146,7 @@ a {
     // min-height: 33%;
     // padding-bottom: 75%;
     height: 56%;
-    background-color: lightgrey;
+    background-color: red;
     margin-bottom: 12px;
   }
   &__img {
@@ -155,11 +163,12 @@ a {
   &__description {
     font-size: 16px;
     line-height: 20px;
+    font-weight: normal;
   }
   &__date {
     font-size: 16px;
     line-height: 20px;
-    color: grey;
+    color: hsl(0, 0, 40%);
   }
 }
 </style>

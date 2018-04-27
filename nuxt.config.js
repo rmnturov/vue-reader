@@ -3,6 +3,9 @@ module.exports = {
   ** Headers of the page
   */
   head: {
+    htmlAttrs: {
+      lang: 'ru',
+    },
     title: 'Vue Reader',
     meta: [
       { charset: 'utf-8' },
