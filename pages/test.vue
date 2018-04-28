@@ -37,7 +37,7 @@ export default {
         });
         return { feed: tempParsed };
       })
-      
+
       .catch(e => {
         error({ statusCode: 404, message: "Post not found" });
       });
