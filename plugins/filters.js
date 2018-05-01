@@ -1,15 +1,12 @@
-import Vue from 'vue';
+import Vue from "vue";
+var moment = require("moment");
 
-Vue.filter('capitalize', val => val.toUpperCase());
+Vue.filter("capitalize", val => val.toUpperCase());
 
-Vue.filter('humanDate', function (val) {
-  var tempDate = new Date(val);
- 
-  var options = {
-    // day: 'numeric',
-    // month: 'short'
-    // timeZone: 'Asia/Novosibirsk'
+Vue.filter("humanDate", function(val) {
+  if (val) {
+    var tempDate = new Date(val);
+    moment.locale("ru");
+    return moment(val).format("D MMMM, h:mm");
   }
-
-  return tempDate.toLocaleString('ru-RU', options);
 });

@@ -4,12 +4,13 @@
       a(:href="feed.link") {{feed.title}}
     ul.feed(v-if="true")
       li.feed__list-item(v-for="post in feed.entries")
-        a.feeditem__link(:href="post.link")
+        a.feeditem__link(:href="post.link" target="_blank")
           figure.feeditem__img-wrapper
             img.feeditem__img(v-if="post.enclosure" :src="post.enclosure.url" :alt="post.title")
-          h2.feeditem__header {{post.title}}
-          p.feeditem__description {{post.content}}
-          time.feeditem__date() {{ post.isoDate | humanDate }}
+          .feeditem__hgroup
+            h2.feeditem__header {{post.title}}
+            p.feeditem__description {{post.content}}
+          time.feeditem__date(:datetime="post.isoDate") {{ post.isoDate | humanDate }}
 </template>
 
 <script>
@@ -23,17 +24,10 @@ export default {
     return axios
       .get(corsNowUrl)
       .then(res => {
-        var entries;
-        var tempTitle;
-        var tempLink;
         var tempParsed;
         var doc = parser.parseString(res.data, function(err, parsed) {
-          entries = parsed.feed.entries;
-          tempTitle = tempTitle;
-          tempLink = tempLink;
-          // console.log(parsed);
           tempParsed = parsed.feed;
-          // console.log(tempParsed);
+          console.log(tempParsed);
         });
         return { feed: tempParsed };
       })
@@ -83,6 +77,9 @@ export default {
   outline: 2px solid #1c6ea4;
   outline-offset: 2px;
 }
+
+$line-height: 20px;
+
 a {
   display: inline;
 }
@@ -100,8 +97,8 @@ a {
     margin: 0;
     padding: 0;
     float: left;
-    width: 25%;
-    height: 400px;
+    width: 33%;
+    // height: 400px;
   }
 }
 
@@ -109,7 +106,6 @@ a {
   &__link {
     position: relative;
     display: flex;
-    height: 100%;
     padding: 30px;
     flex-direction: column;
     overflow: hidden;
@@ -120,54 +116,73 @@ a {
     &:hover {
       .feeditem__header {
         color: red;
-        // border-bottom: 1px solid rgba(255, 0, 0, 0.3);
       }
     }
-
-    &::after {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 60px;
-      right: 0;
-      bottom: 0;
-      background-image: linear-gradient(
-        rgba(255, 255, 255, 0),
-        rgba(255, 255, 255, 0.5) 33%,
-        white
-      );
-    }
   }
+  // обертка для изображения, выставляет пропрорции
   &__img-wrapper {
     box-sizing: border-box;
     position: relative;
     display: block;
     width: 100%;
-    // min-height: 33%;
-    // padding-bottom: 75%;
-    height: 56%;
-    background-color: red;
+    height: 0px;
+    padding-bottom: 56.3%; // соотношение сторон 16/9
+    background-color: lightgrey;
     margin-bottom: 12px;
   }
+  // растягивает изображение на всю площадь обёртки, 
+  // заполняет фоткой всю область, кропает
   &__img {
     display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
+  &__hgroup {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: $line-height * 5;
+    overflow: hidden;
+
+    // плавный фейд текста
+    &::after {
+      content: "";
+      position: absolute;
+      width: 66%;
+      height: $line-height;
+      right: 0;
+      bottom: 0;
+      background-image: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0),
+        rgba(255, 255, 255, 0.5) 33%,
+        white
+      );
+    }
+
+  }
   &__header {
     // display: inline;
     font-size: 16px;
-    line-height: 20px;
+    line-height: $line-height;
+    font-weight: 600;
+    font-kerning: auto;
   }
   &__description {
     font-size: 16px;
-    line-height: 20px;
+    line-height: $line-height;
     font-weight: normal;
   }
   &__date {
     font-size: 16px;
-    line-height: 20px;
+    line-height: $line-height;
     color: hsl(0, 0, 40%);
   }
 }
