@@ -150,6 +150,7 @@ a {
     height: auto;
     max-height: $line-height * 5;
     overflow: hidden;
+    margin-bottom: $line-height / 2;
 
     // плавный фейд текста
     &::after {
@@ -181,7 +182,7 @@ a {
     font-weight: normal;
   }
   &__date {
-    font-size: 16px;
+    font-size: 14px;
     line-height: $line-height;
     color: hsl(0, 0, 40%);
   }
